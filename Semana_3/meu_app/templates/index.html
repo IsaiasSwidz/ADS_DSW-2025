@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulario de contato</title>
+    <link rel="stylesheet" href=" {{ url_for('static', filename='style.css') }} ">
+    <style>
+        textarea {
+            resize: vertical;
+            min-height: 80px
+        }
+    </style>
+</head>
+<body>
+    <div class='container'>
+        <h1>Formulario de contato.</h1>
+
+        <form method='POST'>
+            <label for="nome">Nome: </label>
+            <input type="text" id='nome' name='nome' required>
+
+            <label for="email">E-Mail</label>
+            <input type="email" id="email" name="email" required>
+
+            <label for="mensagem">Mesagem</label>
+            <textarea name="mensagem" id="mensagem" required></textarea>
+
+            <button type='submit'>Enviar</button>
+        </form>
+
+    </div>
+</body>
+</html>
