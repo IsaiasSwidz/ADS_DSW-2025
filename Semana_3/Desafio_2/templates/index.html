@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cadastro de Tarefas</title>
+    <link rel="stylesheet" href=" {{ url_for('static', filename='style.css') }} " />
+  </head>
+  <body>
+    <div class="container">
+      <h1>Lista de Tarefas</h1>
+
+      <form method="POST">
+        <label for="tarefa"><Strong>Tarefa:</Strong></label>
+        <input type="text" name="tarefa" id="tarefa" required />
+
+        <label for="datalimite"><strong>Data Limite:</strong></label>
+        <input type="date" name="datalimite" id="datalimite" required />
+
+        <button type="submit">Adicionar</button>
+      </form>
+      {% if tarefas %}
+        <div class="tarefas-cadastradas">
+          <table>
+            <thead>
+              <tr>
+                <th>Tarefa</th>
+                <th>Data Limite</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for tarefa in tarefas %}
+                <tr>
+                  <td>{{ tarefa.tarefa }}</td>
+                  <td>{{ tarefa.datalimite }}</td>
+                </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      {% endif %}
+    </div>
+  </body>
+</html>
