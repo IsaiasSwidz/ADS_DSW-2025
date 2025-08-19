@@ -7,48 +7,40 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
+  <div class="container">
     <h1>Cadastro Didático</h1>
 
     {% with messages = get_flashed_messages(with_categories=true) %}
-        {% if messages %}
-            {% for category, message in messages %}
-                <div>
-                    {{ message }}
-                </div>
-            {% endfor %}
-        {% endif %}
+      {% if messages %}
+        {% for category, message in messages %}
+          <div class="flash">{{ message }}</div>
+        {% endfor %}
+      {% endif %}
     {% endwith %}
 
     <form action="" method="post" novalidate>
-        <!-- Token CSRF -->
-        {{ form.hidden_tag() }}
+      {{ form.hidden_tag() }}
 
-        {{ form.nome.label }} <!-- Label HTML -->
+      <div class="field">
+        {{ form.nome.label }}
         {{ form.nome(class="form-control", placeholder='Digite seu nome') }}
+        {% for error in form.nome.errors %}
+          <div class="error">{{ error }}</div>
+        {% endfor %}
+      </div>
 
-        <!-- Tratamento de erros -->
-        {% if form.nome.errors %}
-            {% for error in form.nome.errors %}
-                <div>
-                    {{ error }}
-                </div>
-            {% endfor %}
-        {% endif %}
-
-        {{ form.hidden_tag() }}
-
-        {{ form.email.label }} <!-- Label HTML -->
+      <div class="field">
+        {{ form.email.label }}
         {{ form.email(class="form-control", placeholder='Digite seu E-Mail') }}
+        {% for error in form.email.errors %}
+          <div class="error">{{ error }}</div>
+        {% endfor %}
+      </div>
 
-        {% if form.email.errors %}
-            {% for error in form.email.errors %}
-                <div>
-                    {{ error }}
-                </div>
-            {% endfor %}
-        {% endif %}
-
-        {{ form.submit(class='submit-btn') }}
+      {{ form.submit(class='submit-btn') }}
     </form>
+
+    <p class="voltar"><a href="{{ url_for('index') }}">Voltar</a></p>
+  </div>
 </body>
 </html>

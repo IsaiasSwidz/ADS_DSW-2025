@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="utf-8" />
+    <title>Registro</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
+  </head>
+  <body>
+    <h1>Formulário de Registro</h1>
+
+    {% with msgs=get_flashed_messages() %}
+      {% if msgs %}
+        {% for m in msgs %}
+          <div class="flash">{{ m }}</div>
+        {% endfor %}
+      {% endif %}
+    {% endwith %}
+
+    <form method="POST">
+      {{ form.csrf_token }}
+
+      <div class="field">
+        <label for="{{ form.nome.id }}">{{ form.nome.label }}</label>
+        {{ form.nome(id=form.nome.id, placeholder='Seu nome completo') }}
+        {% for e in form.nome.errors %}
+          <div class="error">{{ e }}</div>
+        {% endfor %}
+      </div>
+
+      <div class="field">
+        <label for="{{ form.email.id }}">{{ form.email.label }}</label>
+        {{ form.email(id=form.email.id, placeholder='voce@exemplo.com') }}
+        {% for e in form.email.errors %}
+          <div class="error">{{ e }}</div>
+        {% endfor %}
+      </div>
+
+      <div class="field">
+        <label for="{{ form.senha.id }}">{{ form.senha.label }}</label>
+        {{ form.senha(id=form.senha.id, placeholder='Mínimo 8 caracteres') }}
+        {% for e in form.senha.errors %}
+          <div class="error">{{ e }}</div>
+        {% endfor %}
+      </div>
+
+      <div class="field">
+        <label for="{{ form.confirmar_senha.id }}">{{ form.confirmar_senha.label }}</label>
+        {{ form.confirmar_senha(id=form.confirmar_senha.id, placeholder='Repita a senha') }}
+        {% for e in form.confirmar_senha.errors %}
+          <div class="error">{{ e }}</div>
+        {% endfor %}
+      </div>
+
+      <div class="field">
+        <label for="{{ form.biografia.id }}">{{ form.biografia.label }}</label>
+        {{ form.biografia(id=form.biografia.id, rows='5', placeholder='Conte um pouco sobre você (opcional)') }}
+        {% for e in form.biografia.errors %}
+          <div class="error">{{ e }}</div>
+        {% endfor %}
+      </div>
+
+      <div class="field checkbox">
+        {{ form.aceitar_termos(id=form.aceitar_termos.id) }}
+        <label for="{{ form.aceitar_termos.id }}">{{ form.aceitar_termos.label }}</label>
+        {% for e in form.aceitar_termos.errors %}
+          <div class="error">{{ e }}</div>
+        {% endfor %}
+      </div>
+
+      {{ form.submit() }}
+    </form>
+
+    <p style="margin-top:1rem;">
+      <a href="{{ url_for('index') }}">Voltar</a>
+    </p>
+  </body>
+</html>
